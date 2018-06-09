@@ -2,12 +2,14 @@ package org.sfitengg.libraryapplication.login.Presenter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.login.Model.LoginModel;
 import org.sfitengg.libraryapplication.login.View.LoginViewInterface;
+import org.sfitengg.libraryapplication.main.Model.MainModel;
 
 public class LoginPresenter implements LoginPresenterInterface {
     private LoginViewInterface loginView;
@@ -23,6 +25,10 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         if(isLoginSuccessful){
             loginView.onLogin("Success");
+
+            Intent output = new Intent();
+            output.putExtra("pid", pid);
+            ((Activity)loginView).setResult(Activity.RESULT_OK, output);
             ((Activity)loginView).finish();
         }
         else{

@@ -21,6 +21,7 @@ class Book{
 }
 public class MainModel{
 
+    public int pid;
     Book books[] = {
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
@@ -33,4 +34,5 @@ public class MainModel{
     public Book[] getBooks(){
         return books;
     }
+
 }

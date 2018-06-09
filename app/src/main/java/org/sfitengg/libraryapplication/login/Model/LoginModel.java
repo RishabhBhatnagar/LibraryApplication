@@ -4,20 +4,12 @@ package org.sfitengg.libraryapplication.login.Model;
 public class LoginModel implements LoginModelInterface {
 
     String password;
-    int pid;
+    static int pid;
 
     public LoginModel(int pid, String password){
         this.pid = pid;
         this.password = password;
     }
-
-    private String getPassword(){
-        return password;
-    }
-    private int getPid(){
-        return pid;
-    }
-
 
     @Override
     public boolean validatePid(int pid) {
