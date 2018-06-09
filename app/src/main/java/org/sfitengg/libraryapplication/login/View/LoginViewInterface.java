@@ -1,6 +1,9 @@
 package org.sfitengg.libraryapplication.login.View;
 
+import android.widget.EditText;
+
 public interface LoginViewInterface {
-    public void onLogin(String message);
-    public void forgotPassword(String message);
+    void onLogin(String message);
+    void forgotPassword();
+    void handleEmptyFields(String editText);
 }

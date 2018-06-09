@@ -1,5 +1,11 @@
 package org.sfitengg.libraryapplication.login.Presenter;
 
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import org.sfitengg.libraryapplication.login.Model.LoginModel;
 import org.sfitengg.libraryapplication.login.View.LoginViewInterface;
 
@@ -17,6 +23,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
         if(isLoginSuccessful){
             loginView.onLogin("Success");
+            ((Activity)loginView).finish();
         }
         else{
             loginView.onLogin("Failure");
@@ -24,7 +31,13 @@ public class LoginPresenter implements LoginPresenterInterface {
     }
 
     @Override
-    public int forgotPassword(int pid) {
+    public int forgotPassword() {
+        loginView.forgotPassword();
         return 0;
+    }
+
+    @Override
+    public void handleEmptyFields(String editText) {
+        loginView.handleEmptyFields(editText);
     }
 }

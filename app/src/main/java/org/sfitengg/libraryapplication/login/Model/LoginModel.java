@@ -11,6 +11,14 @@ public class LoginModel implements LoginModelInterface {
         this.password = password;
     }
 
+    private String getPassword(){
+        return password;
+    }
+    private int getPid(){
+        return pid;
+    }
+
+
     @Override
     public boolean validatePid(int pid) {
         if(String.valueOf(pid).length() == 6){

@@ -1,12 +1,14 @@
-package org.sfitengg.libraryapplication;
+package org.sfitengg.libraryapplication.main;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import org.sfitengg.libraryapplication.main.View.MainViewInterface;
+import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MainViewInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
