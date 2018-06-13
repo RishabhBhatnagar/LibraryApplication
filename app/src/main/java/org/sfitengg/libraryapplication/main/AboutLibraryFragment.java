@@ -1,4 +1,4 @@
-package org.sfitengg.libraryapplication;
+package org.sfitengg.libraryapplication.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,13 +7,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.sfitengg.libraryapplication.R;
+import org.sfitengg.libraryapplication.main.Presenter.MainPresenter;
 
 /**
  *
  */
 
-public class AboutLibraryFragment extends Fragment {
+public class AboutLibraryFragment extends Fragment{
+
+    public TextView description;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -21,13 +28,9 @@ public class AboutLibraryFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.text_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "aiaifisg", Toast.LENGTH_SHORT).show();
-            }
-        });
+        description = view.findViewById(R.id.text_view);
+        description.setText(getArguments().getString("data"));
     }
 }

@@ -1,25 +1,17 @@
 package org.sfitengg.libraryapplication.main.Presenter;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import org.sfitengg.libraryapplication.AboutLibraryFragment;
+import org.sfitengg.libraryapplication.main.AboutLibraryFragment;
 import org.sfitengg.libraryapplication.R;
-import org.sfitengg.libraryapplication.login.Model.LoginModel;
-import org.sfitengg.libraryapplication.main.MainActivity;
+import org.sfitengg.libraryapplication.main.IssuedBooksFragment;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
 import org.sfitengg.libraryapplication.main.View.MainViewInterface;
 
@@ -58,24 +50,29 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
 
     @Override
     public void handleNavigationView(NavigationView navigationView, final DrawerLayout drawerLayout) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment fragment = null;
-                        switch(item.getItemId()){
-                            case R.id.about_library :
-                                fragment = new AboutLibraryFragment();
-                                break;
-                        }
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                        if(fragment != null){
-                            mainView.setFragment(fragment);
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        return true;
-                    }
+                Fragment fragment = null;
+                Bundle bundle = new Bundle();
+
+                switch(item.getItemId()){
+                    case R.id.about_library :
+                        bundle.putString("data", MainPresenter.super.getAboutLibraryData());
+                        fragment = new AboutLibraryFragment();
+                        fragment.setArguments(bundle);
+                        break;
+
+                        case R.id.issued_books:
+                            fragment = new IssuedBooksFragment();
+                            break;
                 }
-        );
+
+                if(fragment != null) mainView.setFragment(fragment);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 }
