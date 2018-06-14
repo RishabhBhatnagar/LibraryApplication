@@ -5,6 +5,9 @@ import java.util.Date;
 public class MainModel{
 
     public int pid;
+    private boolean longClicked;
+    private int numberOfBooksSelected;
+
     Book books[] = {
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
@@ -13,6 +16,10 @@ public class MainModel{
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14))
     };
+
+    public MainModel() {
+        numberOfBooksSelected = 0;
+    }
 
     public String getAboutLibraryData(){
         // # To-Do # //
@@ -26,4 +33,19 @@ public class MainModel{
         return books;
     }
 
+    public boolean isLongClicked() {
+        return longClicked;
+    }
+
+    public void setLongClicked(boolean longClicked) {
+        this.longClicked = longClicked;
+    }
+
+    public int getNumberOfBooksSelected() {
+        return numberOfBooksSelected;
+    }
+
+    public void setNumberOfBooksSelected(int numberOfBooksSelected) {
+        this.numberOfBooksSelected = numberOfBooksSelected;
+    }
 }

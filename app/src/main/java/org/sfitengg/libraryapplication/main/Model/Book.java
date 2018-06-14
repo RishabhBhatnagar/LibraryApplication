@@ -3,6 +3,13 @@ package org.sfitengg.libraryapplication.main.Model;
 import java.util.Date;
 
 public class Book{
+
+    public boolean isSelected(){
+        return selected;
+    }
+    public void setSelected(boolean state){
+        this.selected = state;
+    }
     public int getReissueCount() {
         return reissueCount;
     }
@@ -33,6 +40,7 @@ public class Book{
     String bookName;
     Date issueDate;
     Date returnDate;
+    boolean selected;
 
     public Book(int reissueCount, int fine, String authorName, String bookName, Date issue_date, Date return_date) {
         this.reissueCount = reissueCount;
@@ -41,5 +49,6 @@ public class Book{
         this.bookName = bookName;
         this.issueDate = issue_date;
         this.returnDate = return_date;
+        this.selected = false;
     }
 }

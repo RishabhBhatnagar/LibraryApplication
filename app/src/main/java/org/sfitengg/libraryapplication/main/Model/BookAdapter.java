@@ -1,27 +1,32 @@
 package org.sfitengg.libraryapplication.main.Model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.InflateException;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import org.sfitengg.libraryapplication.R;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
 
     private Context context;
     private List<Book> bookList;
+    private MainModel mainModel;
+    private LinearLayout reissue_ll;
 
-    public BookAdapter(Context context, List<Book> bookList) {
+    public BookAdapter(Context context, List<Book> bookList, MainModel mainModel, LinearLayout reissueLL) {
         this.context = context;
         this.bookList = bookList;
+        this.mainModel = mainModel;
+        this.reissue_ll = reissueLL;
     }
 
     @NonNull
@@ -31,13 +36,49 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                  LayoutInflater.from(context).                               //inflater
                          inflate(R.layout.individual_book_layout, null) //view
          );
-
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book book = bookList.get(position);
+    public void onBindViewHolder(@NonNull final BookViewHolder holder, int position) {
+        final Book book = bookList.get(position);
         holder.name.setText(book.getBookName());
+        holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                reissue_ll.setVisibility(View.VISIBLE);
+                mainModel.setLongClicked(true);
+                mainModel.setNumberOfBooksSelected(mainModel.getNumberOfBooksSelected()+1);
+                book.setSelected(true);
+                holder.linearLayout.setBackgroundColor(Color.BLUE);
+                return true;
+            }
+        });
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mainModel.isLongClicked()){
+                    if(book.isSelected()){
+                        mainModel.setNumberOfBooksSelected(mainModel.getNumberOfBooksSelected()-1);
+                        book.setSelected(false);
+                        holder.linearLayout.setBackgroundColor(Color.WHITE);
+
+                        if(mainModel.getNumberOfBooksSelected()==0){
+                            reissue_ll.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                    else{
+
+                        if(mainModel.getNumberOfBooksSelected()>0){
+                            reissue_ll.setVisibility(View.VISIBLE);
+                        }
+
+                        mainModel.setNumberOfBooksSelected(mainModel.getNumberOfBooksSelected()+1);
+                        book.setSelected(true);
+                        holder.linearLayout.setBackgroundColor(Color.BLUE);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -48,10 +89,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     class BookViewHolder extends RecyclerView.ViewHolder{
 
         TextView name;
+        LinearLayout linearLayout;
+        Button reissue;
+
         public BookViewHolder(View itemView) {
             super(itemView);
 
+            linearLayout = itemView.findViewById(R.id.linear_layout);
             name = itemView.findViewById(R.id.name);
+            reissue = itemView.findViewById(R.id.reissue_button);
         }
     }
 }

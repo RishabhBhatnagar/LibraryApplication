@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +32,13 @@ public class IssuedBooksFragment extends Fragment{
     List<Book> bookList;
     RecyclerView recyclerView;
     BookAdapter adapter;
+    MainModel mainModel;
+    LinearLayout linearLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mainModel = new MainModel();
         return inflater.inflate(R.layout.fragment_issued_books, null);
     }
 
@@ -42,13 +46,16 @@ public class IssuedBooksFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bookList = Arrays.asList((new MainModel()).getBooks());
+        bookList = Arrays.asList((mainModel).getBooks());
+
         recyclerView = view.findViewById(R.id.recycler_view);
+        linearLayout = view.findViewById(R.id.reissue_ll);
+
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new BookAdapter(getActivity(), bookList);
+        adapter = new BookAdapter(getActivity(), bookList, mainModel, linearLayout);
         recyclerView.setAdapter(adapter);
     }
 }
