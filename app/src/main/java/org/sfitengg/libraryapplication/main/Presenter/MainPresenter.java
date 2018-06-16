@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.main.MainActivity;
+import org.sfitengg.libraryapplication.navigation_fragments.AboutFragment;
 import org.sfitengg.libraryapplication.navigation_fragments.AboutLibraryFragment;
 import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.navigation_fragments.IssuedBooksFragment;
@@ -92,21 +93,25 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
 
                 switch(item.getItemId()){
                     case R.id.about_library :
-                        bundle.putString("data", MainPresenter.super.getAboutLibraryData());
+                        bundle.putString("data_about_library", MainPresenter.super.getAboutLibraryData());
                         fragment = new AboutLibraryFragment();
                         fragment.setArguments(bundle);
                         break;
 
-                        case R.id.issued_books:
-                            fragment = new IssuedBooksFragment();
-                            break;
+                    case R.id.issued_books:
+                        fragment = new IssuedBooksFragment();
+                        break;
+                    case R.id.about:
+                        bundle.putString("data_about", MainPresenter.super.getAboutData());
+                        fragment = new AboutFragment();
+                        fragment.setArguments(bundle);
+                        break;
                     case R.id.sign_out:
                         //show alert dialog:
                         AlertDialog.Builder builder = new AlertDialog.Builder((Activity)mainView);
                         builder.setTitle("Sign Out");
                         builder.setMessage("Are you sure you want to sign out??");
                         builder.setCancelable(false);
-
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -123,6 +128,7 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
 
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
+                        break;
                 }
 
                 if(fragment != null) mainView.setFragment(fragment);

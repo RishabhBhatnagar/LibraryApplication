@@ -30,6 +30,11 @@ public class MainModel implements MainModelnterface{
     }
 
     @Override
+    public String getAboutData() {
+        return "about something.";
+    }
+
+    @Override
     public Book[] getBooks() {
         return books;
     }
