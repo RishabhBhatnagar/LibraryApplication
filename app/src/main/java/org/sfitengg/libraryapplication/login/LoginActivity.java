@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     private ConstraintLayout constraintLayout;
 
     //variables:
-    private boolean themeChanged;
     SharedPreferences preferences;
 
     @Override
@@ -40,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         login_button = findViewById(R.id.login);
         forgot_password = findViewById(R.id.forgot_password);
         constraintLayout = findViewById(R.id.constrainLayout);
-        themeChanged = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final LoginPresenter loginPresenter = new LoginPresenter(this);
 
@@ -49,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
             public void onClick(View v) {
                 try{
                     try{
-                        int pid = Integer.parseInt(pid_field.getText().toString());
                         loginPresenter.onLogin(
                                 Integer.parseInt(pid_field.getText().toString()),
                                 password_field.getText().toString());

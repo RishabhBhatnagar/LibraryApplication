@@ -20,8 +20,8 @@ public class LoginModel implements LoginModelInterface {
     }
 
     @Override
-    public boolean checkPassword(String password) {
-        //check password from database
+    public boolean checkPassword(String pid, String password) {
+        //check password from website
         return true;
     }
 }

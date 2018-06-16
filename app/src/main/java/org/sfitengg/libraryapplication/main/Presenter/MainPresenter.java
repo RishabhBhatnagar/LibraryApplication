@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import org.sfitengg.libraryapplication.main.MainActivity;
 import org.sfitengg.libraryapplication.navigation_fragments.AboutFragment;
 import org.sfitengg.libraryapplication.navigation_fragments.AboutLibraryFragment;
 import org.sfitengg.libraryapplication.R;
+import org.sfitengg.libraryapplication.navigation_fragments.HomeFragment;
 import org.sfitengg.libraryapplication.navigation_fragments.IssuedBooksFragment;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
 import org.sfitengg.libraryapplication.main.View.MainViewInterface;
@@ -101,10 +103,15 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
                     case R.id.issued_books:
                         fragment = new IssuedBooksFragment();
                         break;
+
                     case R.id.about:
                         bundle.putString("data_about", MainPresenter.super.getAboutData());
                         fragment = new AboutFragment();
                         fragment.setArguments(bundle);
+                        break;
+
+                    case R.id.home:
+                        fragment = new HomeFragment();
                         break;
                     case R.id.sign_out:
                         //show alert dialog:
@@ -116,7 +123,6 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 preferences.edit().clear().apply();
-                                ((Activity) mainView).recreate();
                             }
                         });
                         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

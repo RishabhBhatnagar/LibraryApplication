@@ -1,5 +1,7 @@
 package org.sfitengg.libraryapplication.main.Model;
 
+import org.sfitengg.libraryapplication.main.MainActivity;
+
 import java.util.Date;
 
 public class MainModel implements MainModelnterface{

@@ -1,5 +1,6 @@
 package org.sfitengg.libraryapplication.main;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import org.sfitengg.libraryapplication.main.Presenter.MainPresenter;
 import org.sfitengg.libraryapplication.main.View.MainViewInterface;
 import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.login.LoginActivity;
+import org.sfitengg.libraryapplication.navigation_fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements MainViewInterface {
 
