@@ -3,7 +3,7 @@
     <group>
         <item android:id="@+id/about_library" android:title="About Library"/>
         <item android:id="@+id/issued_books" android:title="Issued Books"/>
-        <item android:id="@+id/one" android:title="one"/>
         <item android:id="@+id/four" android:title="one"/>
+        <item android:id="@+id/sign_out" android:title="Sign Out"/>
     </group>
 </menu>

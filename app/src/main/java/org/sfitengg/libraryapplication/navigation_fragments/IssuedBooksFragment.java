@@ -1,4 +1,4 @@
-package org.sfitengg.libraryapplication.main;
+package org.sfitengg.libraryapplication.navigation_fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

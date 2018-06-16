@@ -34,12 +34,11 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     private DrawerLayout drawerLayout;
     private AppBarLayout appBarLayout;
     public Toolbar toolbar;
-    private MaterialSearchView searchView;
     private NavigationView navigationView;
 
     private ActionBarDrawerToggle toggle;
     public static final int REQUEST_CODE_GET_PID = 2048;  /*any random number.*/
-    private int pid;
+    public static final String pid_key = "pid";
     private SharedPreferences preferences;
 
     @Override
@@ -55,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
          */
 
         boolean isUserLoggedIn = preferences.getBoolean("loggedIn", false);
+
         if(!isUserLoggedIn){
             //start login activity.
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
             startActivityForResult(loginIntent, REQUEST_CODE_GET_PID);
         }
         else{
-            Toast.makeText(this, "inside else", Toast.LENGTH_SHORT).show();
             rest_code();
         }
 
@@ -76,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         navigationView = findViewById(R.id.navigation_view);
 
         toolbar = findViewById(R.id.my_toolbar);
-        searchView = findViewById(R.id.search_view);
 
         /**Navigation bar setup**/
         setSupportActionBar(toolbar);
@@ -87,47 +85,19 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         toggle.syncState();
         /*Navigation bar setup*/
 
-        MainPresenter presenter = new MainPresenter(this);
-
-        /**
-         * Setup background wallpaper depending upon
-         * the current year in which user is.
-         **/
-        int currentYear = this.pid;
-        try {
-            currentYear = presenter.whichYear(pid);
-        }
-        catch (Exception e){
-            pid = preferences.getInt("pid", 152009);
-            currentYear = presenter.whichYear(pid);
-        }
-        switch (currentYear) {
-            case 1:
-                setBackground(ContextCompat.getColor(this, R.color.fe));
-                break;
-            case 2:
-                setBackground(ContextCompat.getColor(this, R.color.se));
-                break;
-            case 3:
-                setBackground(ContextCompat.getColor(this, R.color.te));
-                break;
-            case 4:
-                setBackground(ContextCompat.getColor(this, R.color.be));
-                break;
-        }
-        /*setting up wallpaper end*/
-
-        presenter.handleNavigationView(navigationView, drawerLayout);
         preferences.edit().putBoolean("loggedIn", true);
         preferences.edit().apply();
+
+        MainPresenter presenter = new MainPresenter(this, preferences);
+        presenter.setWallpaper();
+        presenter.handleNavigationView(navigationView, drawerLayout);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_GET_PID && resultCode == Activity.RESULT_OK && data != null){
-            pid = data.getIntExtra("pid", 162009);
-            preferences.edit().putInt("pid", this.pid);
-            preferences.edit().apply();
+            int pid = data.getIntExtra(pid_key, 112009);
+            (preferences.edit()).putInt(pid_key, pid).apply();
             rest_code();
         }
     }
@@ -142,11 +112,5 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.app_bar_layout, fragment);
         fragmentTransaction.commit();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.activity_main);
     }
 }
