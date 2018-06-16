@@ -24,6 +24,7 @@ public class AboutLibraryFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("About Library");
         return inflater.inflate(R.layout.fragment_about_library, null);
     }
 

@@ -33,22 +33,6 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
     }
 
     @Override
-    public void handleSearchView(MaterialSearchView searchView) {
-        searchView.closeSearch();
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return true;
-            }
-        });
-    }
-
-    @Override
     public void handleNavigationView(NavigationView navigationView, final DrawerLayout drawerLayout) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -75,4 +59,11 @@ public class MainPresenter extends MainModel implements MainPresenterInterface {
             }
         });
     }
+
+    @Override
+    public void reissueBooks() {
+
+    }
+
+
 }

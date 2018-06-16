@@ -1,5 +1,7 @@
 package org.sfitengg.libraryapplication.login;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
     //variables:
     private boolean themeChanged;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         forgot_password = findViewById(R.id.forgot_password);
         constraintLayout = findViewById(R.id.constrainLayout);
         themeChanged = false;
-
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final LoginPresenter loginPresenter = new LoginPresenter(this);
 
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
                 loginPresenter.forgotPassword();
             }
         });
+
+
     }
 
     @Override
@@ -83,9 +88,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     @Override
     public void forgotPassword() {
         Toast.makeText(this, "forgot password", Toast.LENGTH_SHORT).show();
-        /*this.setTheme(R.style.AppTheme);
-        setContentView(R.layout.activity_login);*/
-        //password_field.setTextColor(getColor(white));
     }
 
     @Override

@@ -9,6 +9,6 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 public interface MainPresenterInterface {
     int whichYear(int pid);
-    void handleSearchView(MaterialSearchView searchView);
     void handleNavigationView(NavigationView navigationView, DrawerLayout drawerLayout);
+    void reissueBooks();
 }

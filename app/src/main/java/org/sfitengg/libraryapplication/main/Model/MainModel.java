@@ -2,7 +2,7 @@ package org.sfitengg.libraryapplication.main.Model;
 
 import java.util.Date;
 
-public class MainModel{
+public class MainModel implements MainModelnterface{
 
     public int pid;
     private boolean longClicked;
@@ -29,23 +29,29 @@ public class MainModel{
         return data;
     }
 
-    public Book[] getBooks(){
+    @Override
+    public Book[] getBooks() {
         return books;
     }
 
+    @Override
     public boolean isLongClicked() {
         return longClicked;
     }
 
+    @Override
     public void setLongClicked(boolean longClicked) {
         this.longClicked = longClicked;
     }
 
+    @Override
     public int getNumberOfBooksSelected() {
         return numberOfBooksSelected;
     }
 
+    @Override
     public void setNumberOfBooksSelected(int numberOfBooksSelected) {
         this.numberOfBooksSelected = numberOfBooksSelected;
     }
+
 }

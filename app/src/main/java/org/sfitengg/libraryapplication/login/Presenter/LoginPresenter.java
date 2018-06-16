@@ -3,6 +3,8 @@ package org.sfitengg.libraryapplication.login.Presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,7 +13,10 @@ import org.sfitengg.libraryapplication.login.Model.LoginModel;
 import org.sfitengg.libraryapplication.login.View.LoginViewInterface;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
 
+import java.nio.charset.MalformedInputException;
+
 public class LoginPresenter implements LoginPresenterInterface {
+
     private LoginViewInterface loginView;
 
     public LoginPresenter(LoginViewInterface loginView){
@@ -28,6 +33,7 @@ public class LoginPresenter implements LoginPresenterInterface {
 
             Intent output = new Intent();
             output.putExtra("pid", pid);
+
             ((Activity)loginView).setResult(Activity.RESULT_OK, output);
             ((Activity)loginView).finish();
         }
