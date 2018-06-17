@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LibraryApplication</string>
+    <string name="login_successful">login successful</string>
+    <string name="login_failed">login failed</string>
+    <string name="password_prompt">Enter your password</string>
+    <string name="pid_prompt">Enter your pid</string>
+    <string name="login_button">Submit</string>
+    <string name="app_drawer_close">close</string>
+    <string name="app_drawer_open">open</string>
+</resources>
