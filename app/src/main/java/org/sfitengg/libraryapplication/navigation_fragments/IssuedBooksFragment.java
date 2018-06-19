@@ -1,6 +1,7 @@
 package org.sfitengg.libraryapplication.navigation_fragments;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,10 @@ import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.main.Model.Book;
 import org.sfitengg.libraryapplication.main.Model.BookAdapter;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
+import org.sfitengg.libraryapplication.main.Presenter.GoGoGadget;
+import org.sfitengg.libraryapplication.main.Presenter.MainActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +43,19 @@ public class IssuedBooksFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bookList = Arrays.asList((mainModel).getBooks());
+   // if(GoGoGadget.resultCode1!=GoGoGadget.ERROR_INCORRECT_PID_OR_PASSWORD)
+      //  {
+        Bundle b  = new Bundle();
+        List<Book>bookList=new ArrayList<>();
+       /* for (Parcelable p : b.getParcelableArrayList("books")) {
+            //Book a = (Book) p;
+            bookList.add(() p);
+       // }
+
+        }*/
+
+
+       // bookList = Arrays.asList((mainModel).getBooks());
 
         recyclerView = view.findViewById(R.id.recycler_view);
         linearLayout = view.findViewById(R.id.reissue_ll);
