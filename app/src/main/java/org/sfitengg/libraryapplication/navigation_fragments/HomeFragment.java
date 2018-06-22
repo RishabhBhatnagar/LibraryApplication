@@ -1,4 +1,4 @@
-package org.sfitengg.libraryapplication.main;
+package org.sfitengg.libraryapplication.navigation_fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,29 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.R;
-import org.sfitengg.libraryapplication.main.Presenter.MainPresenter;
 
 /**
  *
  */
 
-public class AboutLibraryFragment extends Fragment{
+public class HomeFragment extends Fragment{
 
     public TextView description;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_about_library, null);
+        getActivity().setTitle("About");
+        return inflater.inflate(R.layout.fragment_home, null);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         description = view.findViewById(R.id.text_view);
-        description.setText(getArguments().getString("data"));
+        description.setText("home");
     }
 }

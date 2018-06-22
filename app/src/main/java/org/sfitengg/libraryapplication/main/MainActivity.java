@@ -1,7 +1,12 @@
 package org.sfitengg.libraryapplication.main;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -24,29 +29,44 @@ import org.sfitengg.libraryapplication.main.Presenter.MainPresenter;
 import org.sfitengg.libraryapplication.main.View.MainViewInterface;
 import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.login.LoginActivity;
+import org.sfitengg.libraryapplication.navigation_fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements MainViewInterface {
 
     private DrawerLayout drawerLayout;
     private AppBarLayout appBarLayout;
     public Toolbar toolbar;
-    private MaterialSearchView searchView;
-    NavigationView navigationView;
+    private NavigationView navigationView;
 
     private ActionBarDrawerToggle toggle;
     public static final int REQUEST_CODE_GET_PID = 2048;  /*any random number.*/
-    int pid;
+    public static final String pid_key = "pid";
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = getApplicationContext().getSharedPreferences("login_preferences", MODE_PRIVATE);
+
         /* Directly redirecting to login
          * without finishing the main activity so that,
          * after successful login, user can come back to main activity again.
          */
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivityForResult(loginIntent, REQUEST_CODE_GET_PID);
+
+        boolean isUserLoggedIn = preferences.getBoolean("loggedIn", false);
+
+        if(!isUserLoggedIn){
+            //start login activity.
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            preferences.edit().putBoolean("loggedIn", true).apply();
+            startActivityForResult(loginIntent, REQUEST_CODE_GET_PID);
+        }
+        else{
+            rest_code();
+        }
+
     }
 
     void rest_code() {
@@ -57,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         navigationView = findViewById(R.id.navigation_view);
 
         toolbar = findViewById(R.id.my_toolbar);
-        searchView = findViewById(R.id.search_view);
 
         /**Navigation bar setup**/
         setSupportActionBar(toolbar);
@@ -68,29 +87,19 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         toggle.syncState();
         /*Navigation bar setup*/
 
-        MainPresenter presenter = new MainPresenter(this);
+        preferences.edit().putBoolean("loggedIn", true);
+        preferences.edit().apply();
 
-        /**
-         * Setup background wallpaper depending upon
-         * the current year in which user is.
-         **/
-        int currentYear = presenter.whichYear(pid);
-        switch(currentYear){
-            case 1 : setBackground(ContextCompat.getColor(this, R.color.fe));break;
-            case 2 : setBackground(ContextCompat.getColor(this, R.color.se));break;
-            case 3 : setBackground(ContextCompat.getColor(this, R.color.te));break;
-            case 4 : setBackground(ContextCompat.getColor(this, R.color.be));break;
-        }
-        /*setting up wallpaper end*/
-
-        presenter.handleSearchView(searchView);
+        MainPresenter presenter = new MainPresenter(this, preferences);
+        presenter.setWallpaper();
         presenter.handleNavigationView(navigationView, drawerLayout);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_GET_PID && resultCode == Activity.RESULT_OK && data != null){
-            this.pid = data.getIntExtra("pid", 162009);
+            int pid = data.getIntExtra(pid_key, 112009);
+            (preferences.edit()).putInt(pid_key, pid).apply();
             rest_code();
         }
     }

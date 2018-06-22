@@ -24,11 +24,6 @@
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-            <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/search_view"
-                android:visibility="visible"/>
         </FrameLayout>
 
         <!--Code for  adding something in mainActivity's xml here-->
@@ -43,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
+        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/navigation_menu"
         android:layout_gravity="start">
 

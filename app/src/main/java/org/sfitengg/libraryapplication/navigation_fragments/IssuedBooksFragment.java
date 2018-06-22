@@ -1,4 +1,4 @@
-package org.sfitengg.libraryapplication.main;
+package org.sfitengg.libraryapplication.navigation_fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,22 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.main.Model.Book;
 import org.sfitengg.libraryapplication.main.Model.BookAdapter;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-/**
- *
- */
 
 public class IssuedBooksFragment extends Fragment{
 
@@ -38,6 +30,7 @@ public class IssuedBooksFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle("Issued Books");
         mainModel = new MainModel();
         return inflater.inflate(R.layout.fragment_issued_books, null);
     }

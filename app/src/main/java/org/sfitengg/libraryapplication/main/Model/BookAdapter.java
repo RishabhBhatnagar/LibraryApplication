@@ -1,5 +1,6 @@
 package org.sfitengg.libraryapplication.main.Model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -11,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.sfitengg.libraryapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
@@ -21,12 +25,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private List<Book> bookList;
     private MainModel mainModel;
     private LinearLayout reissue_ll;
+    private Button reissueButton;
+    private List<Book> selectedBooks;
 
-    public BookAdapter(Context context, List<Book> bookList, MainModel mainModel, LinearLayout reissueLL) {
+    private boolean declared;
+
+    public BookAdapter(final Context context, List<Book> bookList, MainModel mainModel, LinearLayout reissueLL) {
         this.context = context;
         this.bookList = bookList;
         this.mainModel = mainModel;
         this.reissue_ll = reissueLL;
+        selectedBooks = new ArrayList<Book>();
+
+        reissueButton = ((Activity) context).findViewById(R.id.reissue_button);
+        reissueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Reissue Button Clicked.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @NonNull
@@ -45,6 +63,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                selectedBooks.add(book);
                 reissue_ll.setVisibility(View.VISIBLE);
                 mainModel.setLongClicked(true);
                 mainModel.setNumberOfBooksSelected(mainModel.getNumberOfBooksSelected()+1);
@@ -63,12 +82,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         holder.linearLayout.setBackgroundColor(Color.WHITE);
 
                         if(mainModel.getNumberOfBooksSelected()==0){
-                            reissue_ll.setVisibility(View.INVISIBLE);
+                            reissue_ll.setVisibility(View.GONE);
                         }
                     }
                     else{
-
+                        selectedBooks.add(book);
                         if(mainModel.getNumberOfBooksSelected()>0){
+                            reissueButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    int a = 78;
+                                }
+                            });
                             reissue_ll.setVisibility(View.VISIBLE);
                         }
 
@@ -90,14 +115,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         TextView name;
         LinearLayout linearLayout;
-        Button reissue;
 
-        public BookViewHolder(View itemView) {
+        public BookViewHolder(final View itemView) {
             super(itemView);
 
             linearLayout = itemView.findViewById(R.id.linear_layout);
             name = itemView.findViewById(R.id.name);
-            reissue = itemView.findViewById(R.id.reissue_button);
         }
     }
 }
