@@ -17,4 +17,5 @@
     <color name="be">#0845e1</color>
     <color name="guest">#8E0E00</color>
     <color name="name_colour">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>
