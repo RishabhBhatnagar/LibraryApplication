@@ -1,6 +1,9 @@
 package org.sfitengg.libraryapplication.login.Model;
 
 
+import org.sfitengg.libraryapplication.main.Presenter.GoGoGadget;
+import org.sfitengg.libraryapplication.main.Presenter.MainActivity;
+
 public class LoginModel implements LoginModelInterface {
 
     String password;
@@ -20,8 +23,15 @@ public class LoginModel implements LoginModelInterface {
     }
 
     @Override
-    public boolean checkPassword(String pid, String password) {
+    public boolean checkPassword(String pidA, String passwordA) {
         //check password from website
+        MainActivity.pid=pidA;
+        MainActivity.pwd=passwordA;
+        if(GoGoGadget.resultCode1==GoGoGadget.ERROR_INCORRECT_PID_OR_PASSWORD)
+        {
+            return false;
+        }
         return true;
+
     }
 }

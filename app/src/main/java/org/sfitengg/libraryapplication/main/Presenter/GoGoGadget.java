@@ -1,13 +1,16 @@
 package org.sfitengg.libraryapplication.main.Presenter;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.sfitengg.libraryapplication.main.Model.MainModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,12 +20,16 @@ import java.util.Map;
 /**
  * Created by vinay on 14-06-2018.
  */
-class GoGoGadget implements Runnable {
+public class GoGoGadget implements Runnable {
     // Thread class to do Network requests
 
     // References to Calling activity
+    private MainActivity mainActivity = new MainActivity();
     private MyCallback myCallback;
-    private Handler handler; // Handler object needed to post messages to calling activity
+    private Handler handler;
+    private MainModel mainModel;
+    // Handler object needed to post messages to calling activity
+    // public MainModel mainModel;
 
     // Urls to be accessed
     // They are passed in a Bundle to Constructor
@@ -55,6 +62,7 @@ class GoGoGadget implements Runnable {
     // Keys for result bundle
     private static final String rKeyName = "name";
     private static final String rKeyListBooks = "listBooks";
+    public static int resultCode1 = 100;
 
 
     private static final int UNINITIALIZED = 124;
@@ -83,17 +91,7 @@ class GoGoGadget implements Runnable {
         // Call this method in the catch blocks of each web request
         resultCode = ERROR_SERVER_UNREACHABLE;
     }
-    public void GetBook(){
-        List<Book> books = new ArrayList<>();
-        for (Parcelable p : result.getParcelableArrayList(rKeyListBooks)) {
-            Book b = (Book) p;
-            books.add(b);
-        }
-        myCallback.sendBooksToCaller(books);
 
-
-
-    }
     public void setCookies(Map<String, String> cookies) {
         // Use this method to setCookies for all GoGoGadget objects
         // except the first
@@ -105,8 +103,12 @@ class GoGoGadget implements Runnable {
     public Map<String, String> getCookies() {
         return this.cookies;
     }
+//    public String[] book(String[] names)
+//    {
+//        return names;
+//    }
 
-    GoGoGadget(MyCallback myCallback, Bundle bundleURLs, int action, Handler handler) {
+    public GoGoGadget(MyCallback myCallback, Bundle bundleURLs, int action, Handler handler) {
 
         this.myCallback = myCallback;
         // Callback reference is needed
@@ -173,9 +175,11 @@ class GoGoGadget implements Runnable {
                         // Correct Login
                         this.result.putString(rKeyName, name);
                         this.resultCode = RETURN_NAME;
+                        resultCode1=this.resultCode;
                     } else {
                         // incorrect login
                         this.resultCode = ERROR_INCORRECT_PID_OR_PASSWORD;
+                        resultCode1=this.resultCode;
                     }
 
                 } catch (IOException e) {
@@ -272,7 +276,6 @@ class GoGoGadget implements Runnable {
                         "Check the constructor call where you made this object");
         }//switch
 
-
         // end of network operations
         // send message back to activity
         // so that it will handle the rest via the callback
@@ -296,7 +299,19 @@ class GoGoGadget implements Runnable {
                             Book b = (Book) p;
                             books.add(b);
                         }
+                        if(books.isEmpty()){
+                            Toast.makeText(mainActivity, "False", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(mainActivity, "True", Toast.LENGTH_SHORT).show();
+                        }
                         myCallback.sendBooksToCaller(books);
+                        //String names[]=books.toArray(new String[books.size()]);
+
+                        //mainModel.getBooks(names);
+                        //  book(names);
+                        //   mainModel.getBooks((GoGoGadget) books);
+
                         break;
                     case RETURN_NO_BORROWED_BOOKS:
                         myCallback.userHasBorrowedNoBooks();
@@ -329,4 +344,6 @@ class GoGoGadget implements Runnable {
             }// run method of handler Runnable
         });// handler.post()
     }// run method of GoGoGadget
+
+
 }// class GoGoGadget

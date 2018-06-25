@@ -1,15 +1,22 @@
 package org.sfitengg.libraryapplication.main.Model;
 
-import org.sfitengg.libraryapplication.main.MainActivity;
+
+import org.sfitengg.libraryapplication.main.Presenter.Book;
+import org.sfitengg.libraryapplication.main.Presenter.MainActivity;
+import org.sfitengg.libraryapplication.main.Presenter.GoGoGadget;
 
 import java.util.Date;
 
-
 public class MainModel implements MainModelnterface{
+
 
     public int pid;
     private boolean longClicked;
     private int numberOfBooksSelected;
+    MainActivity mainActivity= new MainActivity();
+    GoGoGadget goGoGadget;
+
+
 
     Book books[] = {
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
@@ -19,6 +26,9 @@ public class MainModel implements MainModelnterface{
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14)),
             new Book(1, 0, "Kumbhojkar", "AM", new Date(2018, 6, 12), new Date(2018, 6,14))
     };
+
+
+
 
     public MainModel() {
         numberOfBooksSelected = 0;
@@ -37,10 +47,18 @@ public class MainModel implements MainModelnterface{
         return "about something.";
     }
 
+    // public String a[]= goGoGadget.book();
+
     @Override
-    public Book[] getBooks() {
-        return books;
+
+
+    public Book getBooks() {
+
+
+        return mainActivity.setter();
+
     }
+
 
     @Override
     public boolean isLongClicked() {

@@ -6,21 +6,26 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.R;
-import org.sfitengg.libraryapplication.main.Model.Book;
+//import org.sfitengg.libraryapplication.main.Model.Book;
 import org.sfitengg.libraryapplication.main.Model.BookAdapter;
 import org.sfitengg.libraryapplication.main.Model.MainModel;
+import org.sfitengg.libraryapplication.main.Presenter.Book;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class IssuedBooksFragment extends Fragment{
 
+public class IssuedBooksFragment extends Fragment{
+    TextView textView;
     List<Book> bookList;
     RecyclerView recyclerView;
     BookAdapter adapter;
@@ -40,15 +45,31 @@ public class IssuedBooksFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         bookList = Arrays.asList((mainModel).getBooks());
+        if(bookList.isEmpty()){
+            Log.d("bb","empty");
+        }
+        else{
 
-        recyclerView = view.findViewById(R.id.recycler_view);
-        linearLayout = view.findViewById(R.id.reissue_ll);
+            Log.d("bb","fuller");
+            String  a = bookList.toString();
+            textView = view.findViewById(R.id.textView);
+            textView.setText(a);
 
-        recyclerView.setHasFixedSize(true);
+        }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new BookAdapter(getActivity(), bookList, mainModel, linearLayout);
-        recyclerView.setAdapter(adapter);
+
+
+            recyclerView = view.findViewById(R.id.recycler_view);
+            linearLayout = view.findViewById(R.id.reissue_ll);
+
+            recyclerView.setHasFixedSize(true);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+            adapter = new BookAdapter(getActivity(), bookList, mainModel, linearLayout);
+            recyclerView.setAdapter(adapter);
+
     }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.sfitengg.libraryapplication.R;
+import org.sfitengg.libraryapplication.main.Presenter.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +51,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         return new BookViewHolder(
-                 LayoutInflater.from(context).                               //inflater
-                         inflate(R.layout.individual_book_layout, null) //view
-         );
+        return new BookViewHolder(
+                LayoutInflater.from(context).                               //inflater
+                        inflate(R.layout.individual_book_layout, null) //view
+        );
     }
 
     @Override

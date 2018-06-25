@@ -4,20 +4,27 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import org.sfitengg.libraryapplication.R;
 import org.sfitengg.libraryapplication.navigation_fragments.IssuedBooksFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.speech.SpeechRecognizer.ERROR_SERVER;
+import static org.sfitengg.libraryapplication.main.Presenter.GoGoGadget.ERROR_INCORRECT_PID_OR_PASSWORD;
+import static org.sfitengg.libraryapplication.main.Presenter.GoGoGadget.ERROR_NOT_LOGGED_IN;
+import static org.sfitengg.libraryapplication.main.Presenter.GoGoGadget.ERROR_NO_INTERNET;
 import static org.sfitengg.libraryapplication.main.Presenter.GoGoGadget.ERROR_SERVER_UNREACHABLE;
+import static org.sfitengg.libraryapplication.main.Presenter.GoGoGadget.RETURN_LIST_BOOKS;
 
 public class MainActivity extends AppCompatActivity implements MyCallback {
 
@@ -36,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
 
     Bundle bundleURLs;
 
-    static String pid = "171001";
-    static String pwd = "171001";
+    public static String pid = "171001";
+    public static String pwd = "171001";
 
     TextView tv;
     Handler handler = new Handler();
@@ -77,18 +84,28 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     }
 
 
-
+List<Book>BOOK;
     @Override
     public void sendBooksToCaller(List<Book> books) {
 
         /*IssuedBooksFragment.setArgs("books",books);*/
-        IssuedBooksFragment f = new IssuedBooksFragment();
-        Bundle args = new Bundle();
-        args.putList("books",books);
-        f.setArguments(args);
-        tv.setText(books.toString());
 
+        if ( books != null ) {
+
+            BOOK=  books;
+        }
     }
+
+
+
+
+
+    public Book setter(){
+
+        return (Book) BOOK;
+    }
+
+
 
     @Override
     public void sendStudentNameToCaller(String name) {
@@ -100,11 +117,20 @@ public class MainActivity extends AppCompatActivity implements MyCallback {
     public void passErrorsToCaller(int errorCode) {
         // TODO: Error handling here
         // Check the errorCode against the GoGoGadget constants
-        IssuedBooksFragment f = new IssuedBooksFragment();
-        Bundle args = new Bundle();
-        args.put //Insert the below error//
-        f.setArguments(args);
-        /*IssuedBooksFragment.sendargs(ERROR_SERVER_UNREACHABLE);*/
+
+        switch(errorCode)
+        {
+            case ERROR_NOT_LOGGED_IN:
+                Toast.makeText(getApplicationContext(), "ERROR_NOT_LOGGED_IN", Toast.LENGTH_SHORT).show();
+            case ERROR_NO_INTERNET:
+                Toast.makeText(getApplicationContext(), "ERROR_NO_INTERNET", Toast.LENGTH_SHORT).show();
+            case ERROR_SERVER_UNREACHABLE:
+                Toast.makeText(getApplicationContext(), "ERROR_SERVER_UNREACHABLE", Toast.LENGTH_SHORT).show();
+            case ERROR_INCORRECT_PID_OR_PASSWORD:
+                Toast.makeText(getApplicationContext(), "ERROR_INCORRECT_PID_OR_PASSWORD", Toast.LENGTH_SHORT).show();
+
+
+        }
         tv.setText("ERRORCODE: " + errorCode);
     }
 

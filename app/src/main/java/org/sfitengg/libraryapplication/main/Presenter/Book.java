@@ -2,6 +2,7 @@ package org.sfitengg.libraryapplication.main.Presenter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.util.Date;
 
 /**
  * Created by vinay on 14-06-2018.
@@ -14,6 +15,14 @@ public class Book implements Parcelable {
 
     // All variables are kept as string
     // They can be parsed later in the calling code
+
+    int reissueCount;
+    int fine;
+    String authorName;
+    String bookName;
+    Date issueDate;
+    Date returnDate;
+    boolean selected;
     private String acc_no;
     private String title;
     private String dueDate;
@@ -21,6 +30,50 @@ public class Book implements Parcelable {
     private String renewCount;
     private String reservations;
     private boolean canRenew;
+
+
+    public boolean isSelected(){
+        return selected;
+    }
+    public void setSelected(boolean state){
+        this.selected = state;
+    }
+//    public int getReissueCount() {
+//        return reissueCount;
+//    }
+
+//    public int getFine() {
+//        return fine;
+//    }
+//
+//    public String getAuthorName() {
+//        return authorName;
+//    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+//    public Date getIssueDate() {
+//        return issueDate;
+//    }
+
+//    public Date getReturnDate() {
+//        return returnDate;
+//    }
+    public Book(int reissueCount, int fine, String authorName, String bookName, Date issue_date, Date return_date) {
+        this.reissueCount = reissueCount;
+        this.fine = fine;
+        this.authorName = authorName;
+        this.bookName = bookName;
+        this.issueDate = issue_date;
+        this.returnDate = return_date;
+        this.selected = false;
+    }
+
+
+
+
 
     // Parcellable overrides
     @Override
