@@ -68,7 +68,7 @@ public class IssuedBooksFragment extends Fragment{
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-            adapter = new BookAdapter(getActivity(), bookList, mainModel, linearLayout);
+             adapter = new BookAdapter(getActivity(), bookList, mainModel, linearLayout);
             recyclerView.setAdapter(adapter);
 
     }

@@ -2,7 +2,7 @@ package org.sfitengg.libraryapplication.login.Model;
 
 
 import org.sfitengg.libraryapplication.main.Presenter.GoGoGadget;
-import org.sfitengg.libraryapplication.main.Presenter.MainActivity;
+import org.sfitengg.libraryapplication.main.MainActivity;
 
 public class LoginModel implements LoginModelInterface {
 

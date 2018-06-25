@@ -2,7 +2,7 @@ package org.sfitengg.libraryapplication.main.Model;
 
 
 import org.sfitengg.libraryapplication.main.Presenter.Book;
-import org.sfitengg.libraryapplication.main.Presenter.MainActivity;
+import org.sfitengg.libraryapplication.main.MainActivity;
 import org.sfitengg.libraryapplication.main.Presenter.GoGoGadget;
 
 import java.util.Date;
