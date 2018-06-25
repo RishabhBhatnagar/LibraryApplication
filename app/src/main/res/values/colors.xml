@@ -9,11 +9,17 @@
     <color name="primary_dark">#E12929</color>
     <color name="primary_darker">#CC1D1D</color>
     <color name="accent">#FFFFFF</color>
-    <color name="iron">#CCCCCC</color>
+    <color name="iron">#dad6d6</color>
 
     <color name="fe">#e10816</color>
     <color name="se">#ecf901</color>
     <color name="te">#e96112</color>
     <color name="be">#0845e1</color>
     <color name="guest">#8E0E00</color>
+
+
+    <color name="due_date_colour">#2d41da</color>
+    <color name="fine_colour">#e92626</color>
+    <color name="counter_colour">#d1a924</color>
+    <color name="name_colour">#595858</color>
 </resources>
