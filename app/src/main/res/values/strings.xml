@@ -7,4 +7,7 @@
     <string name="login_button">Submit</string>
     <string name="app_drawer_close">close</string>
     <string name="app_drawer_open">open</string>
+    <string name="due_date_text">due_date_text</string>
+    <string name="fine_amt_text">fine_amt_text</string>
+    <string name="counter_text">counter_text</string>
 </resources>

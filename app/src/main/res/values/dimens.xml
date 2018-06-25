@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="name_margin">12dp</dimen>
+    <dimen name="name_dim">12dp</dimen>
+    <dimen name="rel_lay_margin">12dp</dimen>
+    <dimen name="sub_heads_size">12dp</dimen>
+</resources>
