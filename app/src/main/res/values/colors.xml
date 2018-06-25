@@ -16,6 +16,10 @@
     <color name="te">#e96112</color>
     <color name="be">#0845e1</color>
     <color name="guest">#8E0E00</color>
-    <color name="name_colour">#ffffff</color>
+
     <color name="black">#000000</color>
+    <color name="due_date_colour">#2d41da</color>
+    <color name="fine_colour">#e92626</color>
+    <color name="counter_colour">#d1a924</color>
+    <color name="name_colour">#595858</color>
 </resources>

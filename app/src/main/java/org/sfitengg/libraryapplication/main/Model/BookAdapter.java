@@ -83,6 +83,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                         if(mainModel.getNumberOfBooksSelected()==0){
                             reissue_ll.setVisibility(View.GONE);
+                            mainModel.setLongClicked(false);
                         }
                     }
                     else{
@@ -91,7 +92,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                             reissueButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    int a = 78;
+                                    Toast.makeText(context, "Reissue button clicked", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             reissue_ll.setVisibility(View.VISIBLE);
