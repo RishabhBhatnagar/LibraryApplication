@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         tv.setText(name);
     }
 
+
     @Override
     public void passErrorsToCaller(int errorCode) {
         switch(errorCode)
@@ -253,6 +254,6 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
 
     @Override
     public void userHasBorrowedNoBooks() {
-        tv.setText("User has borrowed no books");
+        //tv.setText("User has borrowed no books");
     }
 }
